@@ -23,6 +23,7 @@ class Graph:
         plt.show()
     def connected(self):
         print(nx.number_connected_components(self.G))
+        return(list(nx.connected_components(self.G)))
 def combine(G,H): #Create the friends and strangers graph based on the graphs
     if len(G.vertices) != len(H.vertices): #Force equal number of vertices
         return None
