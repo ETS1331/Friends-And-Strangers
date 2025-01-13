@@ -22,18 +22,19 @@ class Graph:
         nx.draw_networkx(self.G)
         plt.show()
     def connected(self):
-        print(nx.number_connected_components(self.G))
         return(list(nx.connected_components(self.G)))
+    def diameter(self):
+        return nx.diameter(self.G)
 def combine(G,H): #Create the friends and strangers graph based on the graphs
     if len(G.vertices) != len(H.vertices): #Force equal number of vertices
         return None
     v = len(G.vertices)
-    k = permutations([i+1 for i in range(v)])
+    k = permutations([i for i in range(v)])
     k = list(k)
     I = Graph(k)
     for i in range(len(k)): 
-        for a in range(1,v+1):
-            for b in range(1,v+1):
+        for a in range(v):
+            for b in range(v):
                 if  [a,b] in G.edges and [k[i][a-1],k[i][b-1]] in H.edges: #Swap Conditions! 
                     tmp = list(k[i])
                     tmp[a-1] = k[i][b-1]#ok maybe I should've just let a,b go from 0 to v-1 instead
